@@ -1,14 +1,18 @@
 
 
-local MaxDesignPro = game.Players.LocalPlayer.Character
+local Player = game:GetService("Players").LocalPlayer -- Değişkeni üste aldık
+local MaxDesignPro = Player.Character or Player.CharacterAdded:Wait() -- İlk satırdaki hatayı düzelttik
 
-wait(0.2)
-script = game:GetObjects("rbxassetid://3957677381")[1].BlindReaper
-Player = game:GetService("Players").LocalPlayer
-PlayerGui = Player.PlayerGui
-Cam = workspace.CurrentCamera
-Backpack = Player.Backpack
-Character = workspace.MaxDesignPro
+task.wait(0.2)
+
+-- Global çakışmaları önlemek için local eklendi
+local customScript = game:GetObjects("rbxassetid://3957677381")[1].BlindReaper
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local Cam = workspace.CurrentCamera
+local Backpack = Player:WaitForChild("Backpack")
+
+-- 11. satırdaki hata veren kısım yerine en güvenli yöntem:
+local Character = Player.Character or Player.CharacterAdded:Wait() 
 Humanoid = Character.Humanoid
 Mouse = Player:GetMouse()
 RootPart = Character["HumanoidRootPart"]
