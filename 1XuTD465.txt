@@ -28,6 +28,7 @@ Commands for visualiser mode: play/, vol/, pitch/, skipto/, telltime/]])
 ---- IMPORTANT READING:
 ---- Sources and functions might be taken from others
 
+local Player = game:GetService("Players").LocalPlayer
 plr = game.Players.LocalPlayer
 plr.CharacterAdded:connect(function()
 	script.Disabled = true
@@ -100,20 +101,15 @@ kan.Name = "wreckeda"
 kan.Looped = true
 kan:Play()
 
-local REMOTE = Instance.new("RemoteEvent")
-
-REMOTE.Parent = Character
-
 local playbackloudness = 0
 local sound = kan
-game:GetService("RunService").Heartbeat:Connect(function()
-    REMOTE:FireClient(Player, sound)
 end)
-REMOTE.OnServerEvent:Connect(function(plr, loud)
-    if plr.Name == Player.Name then
-        playbackloudness = loud
+game:GetService("RunService").Heartbeat:Connect(function()
+    if sound then
+        playbackloudness = sound.PlaybackLoudness
     end
 end)
+
 
 local currentThemePlaying = kan.SoundId
 local currentPitch = kan.Pitch
