@@ -1,5 +1,15 @@
-wait(0.2)
+task.wait(0.5) -- 0.2 yerine 0.5 yaparak scriptin daha güvenli yüklenmesini sağlıyoruz
+local Players = game:GetService("Players")
+local plr = Players.LocalPlayer
 
+-- Karakterin tamamen yüklenmesini garantiye alıyoruz (Nil hatasını çözen kısım)
+local char = plr.Character or plr.CharacterAdded:Wait()
+if not char:IsDescendantOf(workspace) then
+    char = plr.CharacterAdded:Wait()
+end
+
+-- Ses dosyasını (kan) tanımlıyoruz
+local sound = char:WaitForChild("Torso"):WaitForChild("Sound") 
 warn([[Galaxy Glitcher Loaded.
 The third glitcher, once as the core is now new.
 
