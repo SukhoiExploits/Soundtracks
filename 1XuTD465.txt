@@ -316,7 +316,16 @@ chat()
 end
 
 
-local Create = LoadLibrary("RbxUtility").Create
+local Create = function(className)
+    return function(properties)
+        local instance = Instance.new(className)
+        for property, value in pairs(properties) do
+            instance[property] = value
+        end
+        return instance
+    end
+end
+
 
 CFuncs = {	
 	["Part"] = {
