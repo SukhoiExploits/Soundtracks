@@ -1260,54 +1260,64 @@ function CreateWeld(Parent, Part0, Part1, C0, C1)
   return Weld
 end
 
-Character=Player.Character 
-PlayerGui=Player.PlayerGui 
-Backpack=Player.Backpack 
-Torso=Character.Torso 
-Head=Character.Head 
-Humanoid=Character.Humanoid
-m=Instance.new('Model',Character)
-LeftArm=Character["Left Arm"] 
-LeftLeg=Character["Left Leg"] 
-RightArm=Character["Right Arm"] 
-RightLeg=Character["Right Leg"] 
-LW=Torso["Left Shoulder"] 
-LH=Torso["Left Hip"] 
-RW=Torso["Right Shoulder"] 
-RH=Torso["Right Hip"] 
-Face = Head.face
-Neck=Torso.Neck
-it=Instance.new
-attacktype=1
-vt=Vector3.new
-cf=CFrame.new
-euler=CFrame.fromEulerAnglesXYZ
-angles=CFrame.Angles
-cloaked=false
-necko=cf(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
-necko2=cf(0, -0.5, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
-LHC0=cf(-1,-1,0,-0,-0,-1,0,1,0,1,0,0)
-LHC1=cf(-0.5,1,0,-0,-0,-1,0,1,0,1,0,0)
-RHC0=cf(1,-1,0,0,0,1,0,1,0,-1,-0,-0)
-RHC1=cf(0.5,1,0,0,0,1,0,1,0,-1,-0,-0)
-RootPart=Character.HumanoidRootPart
-RootJoint=RootPart.RootJoint
-RootCF=euler(-1.57,0,3.14)
-attack = false 
-attackdebounce = false 
-deb=false
-equipped=true
-hand=false
-MMouse=nil
-combo=0
-mana=0
-trispeed=.2
-attackmode='none'
-local idle=0
-local Anim="Idle"
-local Effects={}
-local gun=false
-local shoot=false
+local Player = game:GetService("Players").LocalPlayer
+-- Karakterin ve içindeki parçaların tamamen yüklenmesini bekliyoruz:
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Torso = Character:WaitForChild("Torso")
+local Head = Character:WaitForChild("Head")
+local Humanoid = Character:WaitForChild("Humanoid")
+local RootPart = Character:WaitForChild("HumanoidRootPart")
+
+local PlayerGui = Player:WaitForChild("PlayerGui") 
+local Backpack = Player:WaitForChild("Backpack") 
+
+-- Diğer tanımlamalar (Hata vermemesi için WaitForChild kullanımı en güvenlisidir)
+local LeftArm = Character:WaitForChild("Left Arm") 
+local LeftLeg = Character:WaitForChild("Left Leg") 
+local RightArm = Character:WaitForChild("Right Arm") 
+local RightLeg = Character:WaitForChild("Right Leg") 
+
+local LW = Torso:WaitForChild("Left Shoulder") 
+local LH = Torso:WaitForChild("Left Hip") 
+local RW = Torso:WaitForChild("Right Shoulder") 
+local RH = Torso:WaitForChild("Right Hip") 
+local Face = Head:WaitForChild("face")
+local Neck = Torso:WaitForChild("Neck")
+local RootJoint = RootPart:WaitForChild("RootJoint")
+
+-- Burada Instance.new kullanarak modeli oluşturuyoruz
+local m = Instance.new('Model', Character)
+
+-- Kodunun geri kalan değişkenleri (Aynen kalabilir):
+local it = Instance.new
+local attacktype = 1
+local vt = Vector3.new
+local cf = CFrame.new
+local euler = CFrame.fromEulerAnglesXYZ
+local angles = CFrame.Angles
+local cloaked = false
+local necko = cf(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+local necko2 = cf(0, -0.5, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+local LHC0 = cf(-1,-1,0,-0,-0,-1,0,1,0,1,0,0)
+local LHC1 = cf(-0.5,1,0,-0,-0,-1,0,1,0,1,0,0)
+local RHC0 = cf(1,-1,0,0,0,1,0,1,0,-1,-0,-0)
+local RHC1 = cf(0.5,1,0,0,0,1,0,1,0,-1,-0,-0)
+local RootCF = euler(-1.57,0,3.14)
+local attack = false 
+local attackdebounce = false 
+local deb = false
+local equipped = true
+local hand = false
+local MMouse = nil
+local combo = 0
+local mana = 0
+local trispeed = .2
+local attackmode = 'none'
+local idle = 0
+local Anim = "Idle"
+local Effects = {}
+local gun = false
+local shoot = false
 local sine = 0
 local change = 1
 
