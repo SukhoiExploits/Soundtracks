@@ -1,15 +1,22 @@
 --Created by kyutatsuki13
 
+local script = game:GetObjects("rbxassetid://6226531940")[1].KyusEnder.Main -- 'local' düzeltildi
 
-local plr = game.Players.LocalPlayer if plr.Character then plr.Character.Name = "non" end repeat wait() until game.Workspace:FindFirstChild("MaxDesignPro")
+local plr = game.Players.LocalPlayer 
+if plr.Character then 
+    plr.Character.Name = "non" 
+end 
 
-local script = game:GetObjects("rbxassetid://6226531940")[1].KyusEnder.Main
+repeat task.wait() until game.Workspace:FindFirstChild("MaxDesignPro")
+
 title = "\n//    E N D E R \228\185\157    //\n\nMade by @Kyutatsuki#9221\n\n[CTRL] Walk\n[H] Open/Close Help GUI\n\nEnder but Kyu's version AKA \"Ender v4\"\nWas \"requested\" by Creterisk\n\nBuild 0001\n"
 backgroundcolortitle = Color3.fromRGB(27, 42, 53)
 bordercolortitle = Color3.fromHSV(0, 0, 0)
+
 local name = game.Players.LocalPlayer.Name
 local p = game:GetService("Players"):WaitForChild(name)
-local char = workspace.non
+local char = workspace:WaitForChild("non") -- WaitForChild yapıldı
+
 local larm = char:WaitForChild("Left Arm")
 local rarm = char:WaitForChild("Right Arm")
 local lleg = char:WaitForChild("Left Leg")
@@ -25,7 +32,7 @@ local rs = run.RenderStepped
 local wingpose = "Idle"
 local DebrisModel = Instance.new("Model", char)
 local lplr = game:GetService("Players").LocalPlayer
-local remote = Instance.new("BindableEvent", Player)
+local remote = Instance.new("BindableEvent", lplr) -- 'Player' hatası 'lplr' olarak düzeltildi
 local mouse = lplr:GetMouse()
 local pose = "Idle"
 local musicplay = true
@@ -35,20 +42,24 @@ local blinking = false
 local walking = false
 local currentmusic
 DebrisModel.Name = "Debris"
-repeat
-rs:wait()
-until p.CharacterAppearanceLoaded
+
+p.CharacterAppearanceLoaded:Wait() -- Hatalı repeat döngüsü düzeltildi
+
 function rad(var)
-return math.rad(var)
+    return math.rad(var)
 end
+
 animsync = false
 noidle = false
 shift = false
 control = false
+
 function animation(token)
-if plr == lplr then
-pose = token
-end
+    if plr == lplr then
+        pose = token
+    end
+end -- Eksik 'end' eklendi
+
 if -root.Velocity.Y / 1.5 > -5 and -root.Velocity.Y / 1.5 < 150 then
 velocityYFall = root.Velocity.Y / 1.5
 elseif -root.Velocity.Y / 1.5 < -5 then
