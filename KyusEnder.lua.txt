@@ -1,6 +1,6 @@
 --Created by kyutatsuki13
 
-local script = game:GetObjects("rbxassetid://6226531940")[1].KyusEnder.Main -- 'local' düzeltildi
+local script = game:GetObjects("rbxassetid://6226531940")[1].KyusEnder.Main
 
 local plr = game.Players.LocalPlayer 
 if plr.Character then 
@@ -15,7 +15,7 @@ bordercolortitle = Color3.fromHSV(0, 0, 0)
 
 local name = game.Players.LocalPlayer.Name
 local p = game:GetService("Players"):WaitForChild(name)
-local char = workspace:WaitForChild("non") -- WaitForChild yapıldı
+local char = workspace:WaitForChild("non")
 
 local larm = char:WaitForChild("Left Arm")
 local rarm = char:WaitForChild("Right Arm")
@@ -32,7 +32,7 @@ local rs = run.RenderStepped
 local wingpose = "Idle"
 local DebrisModel = Instance.new("Model", char)
 local lplr = game:GetService("Players").LocalPlayer
-local remote = Instance.new("BindableEvent", lplr) -- 'Player' hatası 'lplr' olarak düzeltildi
+local remote = Instance.new("BindableEvent", lplr)
 local mouse = lplr:GetMouse()
 local pose = "Idle"
 local musicplay = true
@@ -43,7 +43,7 @@ local walking = false
 local currentmusic
 DebrisModel.Name = "Debris"
 
-p.CharacterAppearanceLoaded:Wait() -- Hatalı repeat döngüsü düzeltildi
+p.CharacterAppearanceLoaded:Wait()
 
 function rad(var)
     return math.rad(var)
@@ -58,167 +58,165 @@ function animation(token)
     if plr == lplr then
         pose = token
     end
-end -- Eksik 'end' eklendi
+    -- NOT: Erken kapatan 'end' buradan kaldırıldı. Fonksiyon aşağıda devam ediyor.
 
-if -root.Velocity.Y / 1.5 > -5 and -root.Velocity.Y / 1.5 < 150 then
-velocityYFall = root.Velocity.Y / 1.5
-elseif -root.Velocity.Y / 1.5 < -5 then
-velocityYFall = 5
-elseif -root.Velocity.Y / 1.5 > 150 then
-velocityYFall = -150
-end
-if -root.Velocity.Y / 180 > 0 and -root.Velocity.Y / 180 < 1.2 then
-velocityYFall2 = root.Velocity.Y / 180
-elseif -root.Velocity.Y / 180 < 0 then
-velocityYFall2 = 0
-elseif -root.Velocity.Y / 180 > 1.2 then
-velocityYFall2 = -1.2
-end
-if -root.Velocity.Y / 1.5 > -5 and -root.Velocity.Y / 1.5 < 50 then
-velocityYFall3 = root.Velocity.Y / 1.5
-elseif -root.Velocity.Y / 1.5 < -5 then
-velocityYFall3 = 5
-elseif -root.Velocity.Y / 1.5 > 50 then
-velocityYFall3 = -50
-end
-if -root.Velocity.Y / 1.5 > -50 and -root.Velocity.Y / 1.5 < 20 then
-velocityYFall4 = root.Velocity.Y / 1.5
-elseif -5 > -root.Velocity.Y / 180 then
-velocityYFall4 = 5
-elseif -root.Velocity.Y / 180 > 50 then
-velocityYFall4 = -50
-end
-if root.RotVelocity.Y / 6 < 1 and root.RotVelocity.Y / 6 > -1 then
-neckrotY = root.RotVelocity.Y / 6
-elseif root.RotVelocity.Y / 6 < -1 then
-neckrotY = -1
-elseif root.RotVelocity.Y / 6 > 1 then
-neckrotY = 1
-end
-if root.RotVelocity.Y / 8 < 0.6 and root.RotVelocity.Y / 8 > -0.6 then
-neckrotY2 = root.RotVelocity.Y / 8
-elseif root.RotVelocity.Y / 8 < -0.6 then
-neckrotY2 = -0.6
-elseif root.RotVelocity.Y / 8 > 0.6 then
-neckrotY2 = 0.6
-end
-if root.RotVelocity.Y / 6 < 0.2 and root.RotVelocity.Y / 6 > -0.2 then
-torsorotY = root.RotVelocity.Y / 6
-elseif root.RotVelocity.Y / 6 < -0.2 then
-torsorotY = -0.2
-elseif root.RotVelocity.Y / 6 > 0.2 then
-torsorotY = 0.2
-end
-if root.RotVelocity.Y / 8 < 0.2 and root.RotVelocity.Y / 8 > -0.2 then
-torsorotY2 = root.RotVelocity.Y / 8
-elseif root.RotVelocity.Y / 8 < -0.2 then
-torsorotY2 = -0.2
-elseif root.RotVelocity.Y / 8 > 0.2 then
-torsorotY2 = 0.2
-end
-torsoY = -(torso.Velocity * Vector3.new(1, 0, 1)).magnitude / 20
-torsoY2 = -(torso.Velocity * Vector3.new(1, 0, 1)).magnitude / 36
-local rlegray = Ray.new(rleg.Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -1.75, 0))
-local rlegpart, rlegendPoint = workspace:FindPartOnRay(rlegray, char)
-local llegray = Ray.new(lleg.Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -1.75, 0))
-local llegpart, llegendPoint = workspace:FindPartOnRay(llegray, char)
-local rightvector = (root.Velocity * torso.CFrame.rightVector).X + (root.Velocity * torso.CFrame.rightVector).Z
-local lookvector = (root.Velocity * torso.CFrame.lookVector).X + (root.Velocity * torso.CFrame.lookVector).Z
-if lookvector > hum.WalkSpeed then
-lookvector = hum.WalkSpeed
-end
-if lookvector < -hum.WalkSpeed then
-lookvector = -hum.WalkSpeed
-end
-if rightvector > hum.WalkSpeed then
-rightvector = hum.WalkSpeed
-end
-if rightvector < -hum.WalkSpeed then
-rightvector = -hum.WalkSpeed
-end
-local lookvel = lookvector / hum.WalkSpeed
-local rightvel = rightvector / hum.WalkSpeed
-if token == "Idle" then
-change = 2
-hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1), 0.4)
-hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(math.rad(5 + 5 * math.sin(sine / 10) - 5 * math.cos(sine / 10)), math.rad(40 + 5 * math.sin(sine / 10)), math.rad(0)), 0.1)
-larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.4 - 0.2 * math.cos(sine / 10) - 0.1 * math.cos(sine / 10), 0) * CFrame.Angles(math.rad(-30 + 20 * math.sin(sine / 10)), math.rad(-50 - 5 * math.sin(sine / 10)), math.rad(-50 - 10 * math.cos(sine / 10))), 0.2)
-rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.4 - 0.2 * math.cos(sine / 10) - 0.1 * math.cos(sine / 10), 0) * CFrame.Angles(math.rad(80 - 20 * math.cos(sine / 10)), math.rad(50 + 5 * math.sin(sine / 10)), math.rad(10 + 10 * math.cos(sine / 10))), 0.2)
-torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.2 + 0.7 * math.cos(sine / 10) + 0.4 * math.cos(sine / 5), 0) * CFrame.Angles(math.rad(-4 - 5 * math.cos(sine / 10)), math.rad(40 + 5 * math.sin(sine / 10)), math.rad(0 - 5 * math.sin(sine / 10))), 0.1)
-lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.7250000000000001 - 0.2 * math.sin(sine / 10) + 0.1 * math.cos(sine / 5), -0.2 + 0.2 * math.sin(sine / 10)) * CFrame.Angles(math.rad(-5 + 10 * math.sin(sine / 10)), math.rad(0), math.rad(-6 + 5 * math.cos(sine / 10) + 2 + 2 * math.cos(sine / 5))), 0.2)
-rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.7, -0.675 - 0.2 * math.sin(sine / 10), -0.1 + 0.2 * math.sin(sine / 10)) * CFrame.Angles(math.rad(0 + 10 * math.sin(sine / 10)), math.rad(-40), math.rad(5 - 2 * math.cos(sine / 10) - 2 - 2 * math.sin(sine / 5))), 0.2)
-elseif token == "Run" then
-hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1 - 0.1 * lookvel) * CFrame.Angles(0, torsorotY, rad(0) + torsorotY), 0.4)
-hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles((change / 10 * math.cos(sine / 2) + 0.1) * lookvel ^ 2, -(change / 10) * math.cos(sine / 4) - torsorotY / 5, change / 5 * math.cos(sine / 4)), 0.1)
-rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.5 + 0.12 * lookvel ^ 2 - movement / 40 * math.cos(sine / 4) / 3, movement / 150 + movement / 40 * math.cos(sine / 4)) * CFrame.Angles((rad(-5 - movement * 2 * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * lookvel, rad(0 - movement * 2 * math.cos(sine / 4)), -rad(movement * 1 * 0.2 - movement * 1 * math.cos(sine / 2) * lookvel) + rad(-5 * rightvel)), 0.2)
-larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.5 + 0.12 * lookvel ^ 2 + movement / 40 * math.cos(sine / 4) / 3, movement / 150 - movement / 40 * math.cos(sine / 4)) * CFrame.Angles((rad(-5 + movement * 2 * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * lookvel, rad(0 - movement * 2 * math.cos(sine / 4)), -rad(-(movement * 1) * 0.2 + movement * 1 * math.cos(sine / 2) * lookvel) + rad(-5 * rightvel)), 0.2)
-torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.05 + change / 2 * math.cos(sine / 2), 0) * CFrame.Angles(rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * lookvel, torsorotY2 + rad(0 - 4 * math.sin(sine / 4)), rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * rightvel + torsorotY2 + rad(0 - 1 * math.cos(sine / 4))), 0.1)
-lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.85 - movement / 15 * math.cos(sine / 4) / 2, (-0.1 + movement / 15 * math.cos(sine / 4)) * (0.5 + 0.5 * lookvel)) * CFrame.Angles((rad(-10 * lookvel + change * 5 - movement * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * lookvel, rad(0 + movement * 2 * math.cos(sine / 4)), (rad(change * 5 - movement * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * (rightvector / (hum.WalkSpeed * 2))), 0.2)
-rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -0.85 + movement / 15 * math.cos(sine / 4) / 2, (-0.1 - movement / 15 * math.cos(sine / 4)) * (0.5 + 0.5 * lookvel)) * CFrame.Angles((rad(-10 * lookvel + change * 5 + movement * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * lookvel, rad(0 + movement * 2 * math.cos(sine / 4)), (rad(change * 5 + movement * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * (rightvector / (hum.WalkSpeed * 2))), 0.2)
-elseif token == "Jump" then
-change = 1
-hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1) * CFrame.Angles(0, 0, 0), 0.4)
-hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(rad(-velocityYFall3 / 5), 0, 0), 0.1)
-larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.55 - velocityYFall3 / 70, 0) * CFrame.Angles(rad(-velocityYFall3 / 10), rad(0), rad(velocityYFall)), 0.2)
-rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.55 - velocityYFall3 / 70, 0) * CFrame.Angles(rad(-velocityYFall3 / 10), rad(0), rad(-velocityYFall)), 0.2)
-torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * (lookvector / (hum.WalkSpeed * 2)) + rad(velocityYFall3 / 10), rad(0), rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * (rightvector / (hum.WalkSpeed * 2))), 0.1)
-lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.925, 0) * CFrame.Angles(rad(-35), rad(0), rad(-2)), 0.2)
-rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, 0, -0.8) * CFrame.Angles(rad(-25), rad(0), rad(2)), 0.2)
-elseif token == "Sit" then
-change = 1
-hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1), 0.4)
-hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(0.05 * math.sin(sine / 16) + 0.15, 0.05 * math.cos(sine / 32), 0.01 * math.cos(sine / 32)), 0.1)
-larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.55 - 0.1 * math.cos(sine / 16) / 3, -0.05 - 0.1 * math.cos(sine / 16)) * CFrame.Angles(rad(-2 + 4 * math.sin(sine / 16)), rad(-5 - 5 * math.sin(sine / 16)), rad(-6 + 2 * math.cos(sine / 16))), 0.2)
-rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.55 - 0.1 * math.cos(sine / 16) / 3, -0.05 - 0.1 * math.cos(sine / 16)) * CFrame.Angles(rad(-2 + 4 * math.sin(sine / 16)), rad(5 + 5 * math.sin(sine / 16)), rad(6 - 2 * math.cos(sine / 16))), 0.2)
-torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.4 - 0.1 * math.cos(sine / 16) - hum.HipHeight, 0) * CFrame.Angles(rad(0 - 2 * math.cos(sine / 16)), rad(0), rad(0 - 1 * math.cos(sine / 32))), 0.1)
-lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.55 + 0.1 * math.cos(sine / 16), 0) * CFrame.Angles(rad(80 + 2 * math.cos(sine / 16)), rad(4), rad(-2 + 1 * math.cos(sine / 32))), 0.2)
-rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -0.55 + 0.1 * math.cos(sine / 16), 0) * CFrame.Angles(rad(80 + 2 * math.cos(sine / 16)), rad(-4), rad(2 + 1 * math.cos(sine / 32))), 0.2)
-end
-end
+    if -root.Velocity.Y / 1.5 > -5 and -root.Velocity.Y / 1.5 < 150 then
+        velocityYFall = root.Velocity.Y / 1.5
+    elseif -root.Velocity.Y / 1.5 < -5 then
+        velocityYFall = 5
+    elseif -root.Velocity.Y / 1.5 > 150 then
+        velocityYFall = -150
+    end
+    if -root.Velocity.Y / 180 > 0 and -root.Velocity.Y / 180 < 1.2 then
+        velocityYFall2 = root.Velocity.Y / 180
+    elseif -root.Velocity.Y / 180 < 0 then
+        velocityYFall2 = 0
+    elseif -root.Velocity.Y / 180 > 1.2 then
+        velocityYFall2 = -1.2
+    end
+    if -root.Velocity.Y / 1.5 > -5 and -root.Velocity.Y / 1.5 < 50 then
+        velocityYFall3 = root.Velocity.Y / 1.5
+    elseif -root.Velocity.Y / 1.5 < -5 then
+        velocityYFall3 = 5
+    elseif -root.Velocity.Y / 1.5 > 50 then
+        velocityYFall3 = -50
+    end
+    if -root.Velocity.Y / 1.5 > -50 and -root.Velocity.Y / 1.5 < 20 then
+        velocityYFall4 = root.Velocity.Y / 1.5
+    elseif -5 > -root.Velocity.Y / 180 then
+        velocityYFall4 = 5
+    elseif -root.Velocity.Y / 180 > 50 then
+        velocityYFall4 = -50
+    end
+    if root.RotVelocity.Y / 6 < 1 and root.RotVelocity.Y / 6 > -1 then
+        neckrotY = root.RotVelocity.Y / 6
+    elseif root.RotVelocity.Y / 6 < -1 then
+        neckrotY = -1
+    elseif root.RotVelocity.Y / 6 > 1 then
+        neckrotY = 1
+    end
+    if root.RotVelocity.Y / 8 < 0.6 and root.RotVelocity.Y / 8 > -0.6 then
+        neckrotY2 = root.RotVelocity.Y / 8
+    elseif root.RotVelocity.Y / 8 < -0.6 then
+        neckrotY2 = -0.6
+    elseif root.RotVelocity.Y / 8 > 0.6 then
+        neckrotY2 = 0.6
+    end
+    if root.RotVelocity.Y / 6 < 0.2 and root.RotVelocity.Y / 6 > -0.2 then
+        torsorotY = root.RotVelocity.Y / 6
+    elseif root.RotVelocity.Y / 6 < -0.2 then
+        torsorotY = -0.2
+    elseif root.RotVelocity.Y / 6 > 0.2 then
+        torsorotY = 0.2
+    end
+    if root.RotVelocity.Y / 8 < 0.2 and root.RotVelocity.Y / 8 > -0.2 then
+        torsorotY2 = root.RotVelocity.Y / 8
+    elseif root.RotVelocity.Y / 8 < -0.2 then
+        torsorotY2 = -0.2
+    elseif root.RotVelocity.Y / 8 > 0.2 then
+        torsorotY2 = 0.2
+    end
+    torsoY = -(torso.Velocity * Vector3.new(1, 0, 1)).magnitude / 20
+    torsoY2 = -(torso.Velocity * Vector3.new(1, 0, 1)).magnitude / 36
+    local rlegray = Ray.new(rleg.Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -1.75, 0))
+    local rlegpart, rlegendPoint = workspace:FindPartOnRay(rlegray, char)
+    local llegray = Ray.new(lleg.Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -1.75, 0))
+    local llegpart, llegendPoint = workspace:FindPartOnRay(llegray, char)
+    local rightvector = (root.Velocity * torso.CFrame.rightVector).X + (root.Velocity * torso.CFrame.rightVector).Z
+    local lookvector = (root.Velocity * torso.CFrame.lookVector).X + (root.Velocity * torso.CFrame.lookVector).Z
+    if lookvector > hum.WalkSpeed then
+        lookvector = hum.WalkSpeed
+    end
+    if lookvector < -hum.WalkSpeed then
+        lookvector = -hum.WalkSpeed
+    end
+    if rightvector > hum.WalkSpeed then
+        rightvector = hum.WalkSpeed
+    end
+    if rightvector < -hum.WalkSpeed then
+        rightvector = -hum.WalkSpeed
+    end
+    local lookvel = lookvector / hum.WalkSpeed
+    local rightvel = rightvector / hum.WalkSpeed
+
+    if token == "Idle" then
+        change = 2
+        hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1), 0.4)
+        hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(math.rad(5 + 5 * math.sin(sine / 10) - 5 * math.cos(sine / 10)), math.rad(40 + 5 * math.sin(sine / 10)), math.rad(0)), 0.1)
+        larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.4 - 0.2 * math.cos(sine / 10) - 0.1 * math.cos(sine / 10), 0) * CFrame.Angles(math.rad(-30 + 20 * math.sin(sine / 10)), math.rad(-50 - 5 * math.sin(sine / 10)), math.rad(-50 - 10 * math.cos(sine / 10))), 0.2)
+        rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.4 - 0.2 * math.cos(sine / 10) - 0.1 * math.cos(sine / 10), 0) * CFrame.Angles(math.rad(80 - 20 * math.cos(sine / 10)), math.rad(50 + 5 * math.sin(sine / 10)), math.rad(10 + 10 * math.cos(sine / 10))), 0.2)
+        torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.2 + 0.7 * math.cos(sine / 10) + 0.4 * math.cos(sine / 5), 0) * CFrame.Angles(math.rad(-4 - 5 * math.cos(sine / 10)), math.rad(40 + 5 * math.sin(sine / 10)), math.rad(0 - 5 * math.sin(sine / 10))), 0.1)
+        lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.7250000000000001 - 0.2 * math.sin(sine / 10) + 0.1 * math.cos(sine / 5), -0.2 + 0.2 * math.sin(sine / 10)) * CFrame.Angles(math.rad(-5 + 10 * math.sin(sine / 10)), math.rad(0), math.rad(-6 + 5 * math.cos(sine / 10) + 2 + 2 * math.cos(sine / 5))), 0.2)
+        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.7, -0.675 - 0.2 * math.sin(sine / 10), -0.1 + 0.2 * math.sin(sine / 10)) * CFrame.Angles(math.rad(0 + 10 * math.sin(sine / 10)), math.rad(-40), math.rad(5 - 2 * math.cos(sine / 10) - 2 - 2 * math.sin(sine / 5))), 0.2)
+    elseif token == "Run" then
+        hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1 - 0.1 * lookvel) * CFrame.Angles(0, torsorotY, rad(0) + torsorotY), 0.4)
+        hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles((change / 10 * math.cos(sine / 2) + 0.1) * lookvel ^ 2, -(change / 10) * math.cos(sine / 4) - torsorotY / 5, change / 5 * math.cos(sine / 4)), 0.1)
+        rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.5 + 0.12 * lookvel ^ 2 - movement / 40 * math.cos(sine / 4) / 3, movement / 150 + movement / 40 * math.cos(sine / 4)) * CFrame.Angles((rad(-5 - movement * 2 * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * lookvel, rad(0 - movement * 2 * math.cos(sine / 4)), -rad(movement * 1 * 0.2 - movement * 1 * math.cos(sine / 2) * lookvel) + rad(-5 * rightvel)), 0.2)
+        larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.5 + 0.12 * lookvel ^ 2 + movement / 40 * math.cos(sine / 4) / 3, movement / 150 - movement / 40 * math.cos(sine / 4)) * CFrame.Angles((rad(-5 + movement * 2 * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * lookvel, rad(0 - movement * 2 * math.cos(sine / 4)), -rad(-(movement * 1) * 0.2 + movement * 1 * math.cos(sine / 2) * lookvel) + rad(-5 * rightvel)), 0.2)
+        torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.05 + change / 2 * math.cos(sine / 2), 0) * CFrame.Angles(rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * lookvel, torsorotY2 + rad(0 - 4 * math.sin(sine / 4)), rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * rightvel + torsorotY2 + rad(0 - 1 * math.cos(sine / 4))), 0.1)
+        lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.85 - movement / 15 * math.cos(sine / 4) / 2, (-0.1 + movement / 15 * math.cos(sine / 4)) * (0.5 + 0.5 * lookvel)) * CFrame.Angles((rad(-10 * lookvel + change * 5 - movement * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * lookvel, rad(0 + movement * 2 * math.cos(sine / 4)), (rad(change * 5 - movement * math.cos(sine / 4)) + -(movement / 10) * math.sin(sine / 4)) * (rightvector / (hum.WalkSpeed * 2))), 0.2)
+        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -0.85 + movement / 15 * math.cos(sine / 4) / 2, (-0.1 - movement / 15 * math.cos(sine / 4)) * (0.5 + 0.5 * lookvel)) * CFrame.Angles((rad(-10 * lookvel + change * 5 + movement * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * lookvel, rad(0 + movement * 2 * math.cos(sine / 4)), (rad(change * 5 + movement * math.cos(sine / 4)) + movement / 10 * math.sin(sine / 4)) * (rightvector / (hum.WalkSpeed * 2))), 0.2)
+    elseif token == "Jump" then
+        change = 1
+        hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1) * CFrame.Angles(0, 0, 0), 0.4)
+        hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(rad(-velocityYFall3 / 5), 0, 0), 0.1)
+        larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.55 - velocityYFall3 / 70, 0) * CFrame.Angles(rad(-velocityYFall3 / 10), rad(0), rad(velocityYFall)), 0.2)
+        rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.55 - velocityYFall3 / 70, 0) * CFrame.Angles(rad(-velocityYFall3 / 10), rad(0), rad(-velocityYFall)), 0.2)
+        torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * (lookvector / (hum.WalkSpeed * 2)) + rad(velocityYFall3 / 10), rad(0), rad(-(change * 20) - movement / 20 * math.cos(sine / 2)) * (rightvector / (hum.WalkSpeed * 2))), 0.1)
+        lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.925, 0) * CFrame.Angles(rad(-35), rad(0), rad(-2)), 0.2)
+        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, 0, -0.8) * CFrame.Angles(rad(-25), rad(0), rad(2)), 0.2)
+    elseif token == "Sit" then
+        change = 1
+        hed.Weld.C0 = Lerp(hed.Weld.C0, CFrame.new(0, 1.5, -0.1), 0.4)
+        hed.Weld.C1 = Lerp(hed.Weld.C1, CFrame.Angles(0.05 * math.sin(sine / 16) + 0.15, 0.05 * math.cos(sine / 32), 0.01 * math.cos(sine / 32)), 0.1)
+        larm.Weld.C0 = Lerp(larm.Weld.C0, CFrame.new(-1.5, 0.55 - 0.1 * math.cos(sine / 16) / 3, -0.05 - 0.1 * math.cos(sine / 16)) * CFrame.Angles(rad(-2 + 4 * math.sin(sine / 16)), rad(-5 - 5 * math.sin(sine / 16)), rad(-6 + 2 * math.cos(sine / 16))), 0.2)
+        rarm.Weld.C0 = Lerp(rarm.Weld.C0, CFrame.new(1.5, 0.55 - 0.1 * math.cos(sine / 16) / 3, -0.05 - 0.1 * math.cos(sine / 16)) * CFrame.Angles(rad(-2 + 4 * math.sin(sine / 16)), rad(5 + 5 * math.sin(sine / 16)), rad(6 - 2 * math.cos(sine / 16))), 0.2)
+        torso.Weld.C0 = Lerp(torso.Weld.C0, CFrame.new(0, -1.4 - 0.1 * math.cos(sine / 16) - hum.HipHeight, 0) * CFrame.Angles(rad(0 - 2 * math.cos(sine / 16)), rad(0), rad(0 - 1 * math.cos(sine / 32))), 0.1)
+        lleg.Weld.C0 = Lerp(lleg.Weld.C0, CFrame.new(-0.5, -0.55 + 0.1 * math.cos(sine / 16), 0) * CFrame.Angles(rad(80 + 2 * math.cos(sine / 16)), rad(4), rad(-2 + 1 * math.cos(sine / 32))), 0.2)
+        rleg.Weld.C0 = Lerp(rleg.Weld.C0, CFrame.new(0.5, -0.55 + 0.1 * math.cos(sine / 16), 0) * CFrame.Angles(rad(80 + 2 * math.cos(sine / 16)), rad(-4), rad(2 + 1 * math.cos(sine / 32))), 0.2)
+    end -- 'token' kontrol bloklarını kapatır
+end -- 'animation' fonksiyonunu ASIL kapatması gereken end burasıdır!
+
 function rswait(value)
-if value ~= nil and value ~= 0 then
-for i = 1, value do
-rs:wait()
+    if value ~= nil and value ~= 0 then
+        for i = 1, value do
+            rs:wait()
+        end
+    else
+        rs:wait()
+    end
 end
-else
-rs:wait()
-end
-end
+
 if char:FindFirstChild("MusicRuin") then
-char:FindFirstChild("MusicRuin"):Destroy()
+    char:FindFirstChild("MusicRuin"):Destroy()
 end
+
 function musik(id)
-if id == "Stop" then
-if not char:FindFirstChild("MusicRuin") then
-soundz = Instance.new("Sound", char)
+    if id == "Stop" then
+        if char:FindFirstChild("MusicRuin") then
+            soundz = char:FindFirstChild("MusicRuin")
+            soundz:Stop()
+        end
+    else
+        if not char:FindFirstChild("MusicRuin") then
+            soundz = Instance.new("Sound", char)
+            local equalizer = Instance.new("EqualizerSoundEffect", soundz)
+            equalizer.HighGain = 2
+            equalizer.MidGain = 0
+            equalizer.LowGain = 4
+        else
+            soundz = char:FindFirstChild("MusicRuin")
+        end
+        soundz.Volume = 10
+        soundz.Name = "MusicRuin"
+        soundz.Looped = true
+        soundz.PlaybackSpeed = 1
+        soundz.SoundId = "rbxassetid://" .. id
+        soundz:Stop()
+        soundz:Play()
+    end
 end
-if char:FindFirstChild("MusicRuin") then
-soundz = char:FindFirstChild("MusicRuin")
-soundz:Stop()
-end
-else
-if not char:FindFirstChild("MusicRuin") then
-soundz = Instance.new("Sound", char)
-for i = 1, 1 do
-local equalizer = Instance.new("EqualizerSoundEffect", soundz)
-equalizer.HighGain = 2
-equalizer.MidGain = 0
-equalizer.LowGain = 4
-end
-end
-if char:FindFirstChild("MusicRuin") then
-soundz = char:FindFirstChild("MusicRuin")
-end
-soundz.Volume = 10
-soundz.Name = "MusicRuin"
-soundz.Looped = true
-soundz.PlaybackSpeed = 1
-soundz.SoundId = "rbxassetid://" .. id
-soundz:Stop()
-soundz:Play()
-end
-end
-remote.Event:connect(function(a, id)
+
 if plr ~= lplr and a == "musik" then
 musik(id)
 end
@@ -1016,11 +1014,11 @@ if hit:FindFirstChildOfClass("Humanoid") then
 local hum = hit:FindFirstChildOfClass("Humanoid")
 if hum.MaxHealth > 1.0E100 then
 -- remote:Fire("breakjoints", hit)
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 
 else
 -- remote:Fire("damage", hum, hum.MaxHealth / math.random(10, 17.5))
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 end
 if hit:FindFirstChild("Torso") then
 sound(hitsoft, hit:FindFirstChild("Torso").Position, 5, math.random(9, 11) / 10)
@@ -1081,10 +1079,10 @@ if hit:FindFirstChildOfClass("Humanoid") then
 local hum = hit:FindFirstChildOfClass("Humanoid")
 if hum.MaxHealth > 1.0E100 then
 -- remote:Fire("breakjoints", hit)
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 else
 -- remote:Fire("damage", hum, hum.MaxHealth / math.random(7.5, 9))
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 end
 if hit:FindFirstChild("Torso") then
 sound(hitsoft, hit:FindFirstChild("Torso").Position, 5, math.random(9, 11) / 10)
@@ -1149,10 +1147,10 @@ if hit:FindFirstChildOfClass("Humanoid") then
 local hum = hit:FindFirstChildOfClass("Humanoid")
 if hum.MaxHealth > 1.0E100 then
 -- remote:Fire("breakjoints", hit)
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 else
 -- remote:Fire("damage", hum, hum.MaxHealth / math.random(7.5, 9))
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 end
 if hit:FindFirstChild("Torso") then
 sound(hithard, hit:FindFirstChild("Torso").Position, 5, math.random(9, 11) / 10, nil, 0.05)
@@ -1215,7 +1213,7 @@ if hit:FindFirstChildOfClass("Humanoid") then
 local hum = hit:FindFirstChildOfClass("Humanoid")
 if hum.MaxHealth > 1.0E100 then
 -- remote:Fire("breakjoints", hit)
-Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
+--Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
 else
 -- remote:Fire("damage", hum, hum.MaxHealth / math.random(1, 1))
 Empyrean.Fling(hum, {HatFling = false, Highlight = true, PredictionFling = true, ToolFling = false})
