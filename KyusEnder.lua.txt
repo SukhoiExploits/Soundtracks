@@ -220,7 +220,6 @@ end
 if plr ~= lplr and a == "musik" then
 musik(id)
 end
-end)
 function music(id)
 currentmusic = id
 musik(id)
